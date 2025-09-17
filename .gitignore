@@ -2,3 +2,54 @@
 .specify/
 
 
+# dependencies
+node_modules/
+
+# builds
+dist/
+build/
+storybook-static/
+
+# caches
+.vite/
+.vite/deps/
+.cache/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+
+# logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# env files
+.env
+.env.*
+!.env.example
+!.env*.example
+
+# data and sqlite
+data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# coverage
+coverage/
+
+# OS / misc
+.DS_Store
+Thumbs.db
+
+# temp
+tmp/
+temp/
+
+
