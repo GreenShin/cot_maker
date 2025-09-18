@@ -88,10 +88,31 @@
  - [ ] T030 [P] Author data-model.md (entities, enums, validation rules)
    - Path: `specs/002-specify-cot-cot/data-model.md`
 
+## Phase 3.3 (continued): Filters & Validation Enhancements
+- [ ] T031 Extend filters with new enums (고객투자성향/교차가입/위험등급/세제혜택/납입형태/유동성)
+  - Path: `frontend/src/features/cot-list/filters.tsx`
+- [ ] T032 Sync URL query for new filters (e.g., `risk_profile=AGGRESSIVE&cross=COVERAGE_VARIABLE`)
+  - Path: `frontend/src/features/cot-list/state.ts`
+- [ ] T033 [P] Unit tests for filter <-> URL mapping and label rendering
+  - Path: `frontend/tests/unit/filters.url.test.ts`
+- [ ] T034 [P] Integration test: advanced filters combined behavior
+  - Path: `frontend/tests/integration/cot-list.advanced-filters.test.ts`
+- [ ] T035 Implement CoT category consistency validation and UI error
+  - Paths: `frontend/src/features/cot-detail/center-editor.tsx`, `frontend/src/services/validation.ts`
+- [ ] T036 [P] Warning when product_ids not in questioner.product_list + "추가" 액션
+  - Paths: `frontend/src/features/cot-detail/left-questioner.tsx`, `frontend/src/features/cot-detail/right-product.tsx`
+- [ ] T037 [P] i18n labels: add mappings for new enums
+  - Paths: `frontend/src/i18n/labels.ts`, `frontend/tests/unit/i18n.labels.test.ts`
+- [ ] T038 Update docs: quickstart params for advanced filters
+  - Path: `specs/002-specify-cot-cot/quickstart.md`
+
 ## Dependencies
 - Setup (T001-T004) → Tests (T005-T008) → Core (T009-T020) → Integration (T021-T024) → Polish (T025-T028)
 - 테이블 util 테스트(T025)는 테이블 구현(T010-T012) 이후
 - 미저장 가드(T022)는 상세 편집(T013-T016) 이후
+ - T033/T034는 T031-T032 이후
+ - T035는 T015/T016 및 validation helper 준비 후
+ - T036는 좌/우 패널 기본 구현(T014/T016) 이후
 
 ## Parallel Example
 ```
