@@ -1,0 +1,68 @@
+# Research: 결정 사항 및 근거 (002-specify-cot-cot)
+
+## 1) 필터/정렬/페이징 정책
+- Decision: 필터는 상품분류(증권/보험), 질문유형(확정 enum), 성별(남성/여성), 연령대(10,20,...,80이상) 멀티 조합 지원. 기본 정렬은 최신 수정일 내림차순. 페이징은 페이지네이션(기본 페이지 크기 20) 채택.
+- Rationale: 사용자가 빠르게 최신 작업을 찾는 요구. 서버가 없을 때도 클라이언트 페이지네이션 용이.
+- Alternatives: 무한 스크롤(대량 데이터에 유리) → 초기 구현 복잡도 증가로 보류.
+
+## 2) 반응형 브레이크포인트/레이아웃
+- Decision: Tailwind 기준 sm=640, md=768, lg=1024, xl=1280.
+  - CoT 상세 3열: xl 3열, lg 2열(좌+중 스택, 우 아래), md 이하 1열 스택.
+- Rationale: 데이터 밀도와 가독성 균형.
+- Alternatives: 완전 유동 grid → 복잡도 증가, 초기 범위 벗어남.
+
+## 3) 접근성(A11y)
+- Decision: 키보드 내비게이션(탭 순서 보장), 포커스 스타일, ARIA 라벨링(아코디언/모달/테이블 헤더), 명도 대비 WCAG AA.
+- Rationale: 최소 접근성 기준 확보.
+- Alternatives: 추가 단축키/스크린리더 최적화는 후속.
+
+## 4) 테마/글꼴 크기
+- Decision: theme(light/dark), fontScale(0.875~1.25, step 0.125). 즉시 적용.
+- Rationale: 가독성/선호도 반영.
+- Alternatives: 시스템 테마 연동은 후속 옵션.
+
+## 5) 상태 관리/라우팅 동기화
+- Decision: 필터/테이블 상태는 URL query와 동기화, 상세 편집은 내부 상태 + 미저장 가드.
+- Rationale: 링크 공유/북마크 용이, 데이터 손실 방지.
+- Alternatives: 전역 상태만 사용 → 링크 공유성 저하.
+
+## 6) CoT 상태 enum
+- Decision: 작성중(DRAFT) | 리뷰요청(IN_REVIEW) | 승인(APPROVED) | 반려(REJECTED).
+- Rationale: 편집 워크플로우 최소 단계. 저장 값은 코드(EN), UI는 라벨(KO).
+- Alternatives: 더 세분화된 단계는 후속.
+
+## 7) 질문유형/상품유형 enum(확정)
+- Decision:
+  - 질문유형(QuestionType): 고객특성 강조형, 투자성향 및 조건기반형, 상품 비교 추천형, 연령별 및 생애주기 저축성 상품 추천형, 투자성 상품 추천형, 건강 및 질병보장 대비형 (저장 코드는 영문 상수).
+  - 상품유형(ProductType): 주식형, 채권형, 재간접, 단기금융, 파생형, 신탁/퇴직연금, 연금, 종신, 정기, 질병, 건강, 암, 변액 (저장 코드는 영문 상수).
+- Rationale: 요구사항 일치. 라벨은 한글, 저장은 코드로 일관.
+- Alternatives: 운영 중 확장.
+
+## 8) 데이터 보존/자동 저장
+- Decision: 자동 저장 미도입. 저장 버튼 기반, 이탈 시 확인 모달.
+- Rationale: 단순/예측 가능.
+- Alternatives: 초안 자동 저장 → 후속 고려.
+
+## 9) 성능 목표
+- Decision: 테이블 상호작용 p95 < 200ms(1k 행), 초기 로드 < 2s(목 데이터 기준).
+- Rationale: 쾌적한 UX 기준.
+
+---
+
+## 10) 모호 사항 결정(Entities/Constraints)
+- Decision: Cot.product_category는 참조하는 모든 product_ids의 Product.product_category와 동일해야 한다. 서로 다를 경우 저장 불가(Validation Error).  
+  - Rationale: CoT 단위 일관된 분류 유지. 혼합 카테고리는 허용하지 않음.
+- Decision: Questioner.product_list는 Questioner가 보유한 Product.id 리스트이며, Cot.product_ids와 독립적으로 관리한다. CoT 저장 시 product_ids가 Questioner.product_list에 없어도 저장 가능하되, UI에서 경고 및 "질문자 보유상품에 추가" 선택을 제공한다(자동 동기화는 하지 않음).  
+  - Rationale: 데이터 무결성 강제 대신 사용 흐름 유연성 보장.
+- Decision: Product의 corpus 필드(만기/수익률/손실율/검색키워드/비고)는 자유 텍스트로 저장하며, 기술적 제한은 두지 않는다(권장 상한 8000자, UI에서 길이 가이드만 제공).  
+  - Rationale: 초기 범위에서 간결성/유연성을 우선.
+
+Checklist
+- [x] 필터/정렬/페이징 정책 정의
+- [x] 반응형 브레이크포인트/재배치 정의
+- [x] 접근성 최소 기준 정의
+- [x] 테마/글꼴 전략 정의
+- [x] 상태/라우팅 동기화 전략
+- [x] CoT 상태/질문유형/상품유형 enum 초안
+- [x] 자동 저장 정책
+- [x] 성능 목표
