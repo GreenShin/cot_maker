@@ -6,6 +6,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
 - ProductCategory (상품분류):
   - SECURITIES = "증권"
   - INSURANCE = "보험"
+
 - ProductType (상품유형):
   - EQUITY = "주식형"
   - BOND = "채권형"
@@ -21,6 +22,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - CANCER = "암"
   - VARIABLE = "변액"
   - NOT_APPLICABLE = "미해당"
+
 - QuestionType (질문유형):
   - EMPHASIZE_CUSTOMER_CHARACTERISTICS = "고객특성 강조형"
   - RISK_PROFILE_CONDITION_BASED = "투자성향 및 조건기반형"
@@ -29,10 +31,12 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - INVESTMENT_PRODUCT_RECOMMENDATION = "투자성 상품 추천형"
   - HEALTH_DISEASE_COVERAGE = "건강 및 질병보장 대비형"
   - NOT_APPLICABLE = "미해당"
+
 - Gender (성별):
   - MALE = "남성"
   - FEMALE = "여성"
   - NOT_APPLICABLE = "미해당"
+
 - AgeBand (연령대):
   - A20 = "20"
   - A30 = "30"
@@ -42,11 +46,13 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - A70 = "70"
   - A80_PLUS = "80이상"
   - NOT_APPLICABLE = "미해당"
+
 - CotStatus (CoT상태):
   - DRAFT = "작성중"
   - IN_REVIEW = "리뷰요청"
   - APPROVED = "승인"
   - REJECTED = "반려"
+
 - CustomerRiskProfile (고객투자성향):
   - AGGRESSIVE = "공격투자형"
   - STABILITY_SEEKING = "안정추구형"
@@ -54,6 +60,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - RISK_NEUTRAL = "위험중립형"
   - ACTIVE = "적극투자형"
   - NOT_APPLICABLE = "미해당"
+
 - CrossSubscription (교차가입):
   - COVERAGE_ONLY = "보장only"
   - VARIABLE_ONLY = "변액only"
@@ -62,6 +69,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - COVERAGE_OTHER = "보장+기타"
   - VARIABLE_OTHER = "변액+기타"
   - COVERAGE_VARIABLE_OTHER = "보장+변액+기타"
+  - NOT_APPLICABLE = "미해당"
 
 - RiskGrade (위험등급):
   - GRADE_1 = "1등급"
@@ -70,15 +78,18 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - GRADE_4 = "4등급"
   - GRADE_5 = "5등급"
   - GRADE_6 = "6등급"
+  - NOT_APPLICABLE = "미해당"
 
 - TaxBenefit (세제혜택):
   - YES = "유"
   - NO = "무"
+  - NOT_APPLICABLE = "미해당"
 
 - PaymentType (납입형태):
   - LUMP_SUM = "일시납"
   - ADDITIONAL = "추가납입"
   - MIXED = "혼합"
+  - NOT_APPLICABLE = "미해당"
 
 - Liquidity (유동성):
   - REDEEMABLE = "중도환매 가능"
@@ -87,56 +98,71 @@ Note: Stored values use Code (EN), UI displays Label (KO).
 
 ## Entities
 
-### Questioner
+### Questioner (질문자)
 - id: string (uuid-like)
-- name: string (1..80)
 - gender: Gender
-- ageBand: AgeBand
-- categoryHint?: ProductCategory
-- createdAt: ISO8601
-- updatedAt: ISO8601
+- age_band: AgeBand
+- product_category: ProductCategory
+- customer_risk_profile: CustomerRiskProfile
+- cross_subscription: CrossSubscription
+- product_list: string[] (Product.id[])
+- product_count: number (≥ 0)
+- created_at: ISO8601
+- updated_at: ISO8601
 
 Validation:
-- name required, length ≤ 80
+- product_count must equal length(product_list)
 
-### Product
+### Product (상품)
 - id: string (uuid-like)
 - name: string (1..120)
-- category: ProductCategory
-- type: ProductType
-- createdAt: ISO8601
-- updatedAt: ISO8601
+- product_category: ProductCategory
+- product_type: ProductType
+- maturity_corpus: text (만기)
+- yield_corpus: text (수익률)
+- risk_grade: RiskGrade
+- tax_benefit: TaxBenefit
+- payment_type: PaymentType
+- loss_rate_corpus: text (손실율)
+- liquidity: Liquidity
+- search_keywords_corpus: text (검색키워드)
+- note_corpus: text (비고)
+- created_at: ISO8601
+- updated_at: ISO8601
 
 Validation:
 - name required, length ≤ 120
+- corpus fields are free text (no hard limit suggested)
 
-### Cot
+### Cot (CoT)
 - id: string (uuid-like)
-- productId: Product.id
-- questionerId: Questioner.id
-- productCategory: ProductCategory
-- questionType: QuestionType
-- questionText: string (1..2000)
-- cotSteps: string[] (each 0..2000, order preserved)
-- answerText: string (0..4000)
-- status: CotStatus
-- createdAt: ISO8601
-- updatedAt: ISO8601
+- questioner_id: Questioner.id
+- product_ids: string[] (Product.id[])
+- product_category: ProductCategory
+- question_type: QuestionType
+- question_text: string (1..4000)
+- cot_steps: string[] (length 3..10, each ≤ 4000, order preserved)
+- answer_text: string (0..4000)
+- cot_status: CotStatus
+- created_at: ISO8601
+- updated_at: ISO8601
 
 Validation:
-- productId, questionerId required
-- questionText required (≤ 2000)
-- cotSteps length 0..20, each ≤ 2000
-- answerText ≤ 4000
+- questioner_id required
+- product_ids length ≥ 1
+- question_text required (≤ 4000)
+- cot_steps length 3..10, each ≤ 4000
+- answer_text ≤ 4000
 
 ## Relationships
-- Cot.productId → Product.id (many-to-one)
-- Cot.questionerId → Questioner.id (many-to-one)
+- Cot.product_ids[] → Product.id (many-to-many)
+- Questioner.product_list[] → Product.id (many-to-many)
+- Cot.questioner_id → Questioner.id (many-to-one)
 
 ## Indexing (when backend added)
-- Product(name), Product(category,type)
-- Questioner(name, gender, ageBand)
-- Cot(updatedAt desc), Cot(status, productCategory, questionType)
+- Product(name), Product(product_category, product_type, risk_grade, tax_benefit)
+- Questioner(gender, age_band, product_category, customer_risk_profile, cross_subscription, product_count)
+- Cot(updated_at desc), Cot(cot_status, product_category, question_type)
 
 ---
 
