@@ -83,6 +83,10 @@
   - Path: `specs/002-specify-cot-cot/quickstart.md`
 - [ ] T028 [P] Update agent file (active tech list)
   - Path: repository root agent file
+ - [ ] T029 [P] Author research.md (decisions for filters, breakpoints, A11y, state)
+   - Path: `specs/002-specify-cot-cot/research.md`
+ - [ ] T030 [P] Author data-model.md (entities, enums, validation rules)
+   - Path: `specs/002-specify-cot-cot/data-model.md`
 
 ## Dependencies
 - Setup (T001-T004) → Tests (T005-T008) → Core (T009-T020) → Integration (T021-T024) → Polish (T025-T028)
