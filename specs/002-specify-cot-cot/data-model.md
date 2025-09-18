@@ -31,7 +31,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - MALE = "남성"
   - FEMALE = "여성"
 - AgeBand (연령대):
-  - A10 = "10"
+  - NOT_APPLICABLE = "미해당"
   - A20 = "20"
   - A30 = "30"
   - A40 = "40"
@@ -44,8 +44,6 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - IN_REVIEW = "리뷰요청"
   - APPROVED = "승인"
   - REJECTED = "반려"
-
-// 추가 Enums
 - CustomerRiskProfile (고객투자성향):
   - AGGRESSIVE = "공격투자형"
   - STABILITY_SEEKING = "안정추구형"
