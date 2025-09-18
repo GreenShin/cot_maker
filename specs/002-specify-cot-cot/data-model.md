@@ -20,6 +20,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - HEALTH = "건강"
   - CANCER = "암"
   - VARIABLE = "변액"
+  - NOT_APPLICABLE = "미해당"
 - QuestionType (질문유형):
   - EMPHASIZE_CUSTOMER_CHARACTERISTICS = "고객특성 강조형"
   - RISK_PROFILE_CONDITION_BASED = "투자성향 및 조건기반형"
@@ -27,11 +28,12 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - AGE_LIFECYCLE_SAVINGS_RECOMMENDATION = "연령별 및 생애주기 저축성 상품 추천형"
   - INVESTMENT_PRODUCT_RECOMMENDATION = "투자성 상품 추천형"
   - HEALTH_DISEASE_COVERAGE = "건강 및 질병보장 대비형"
+  - NOT_APPLICABLE = "미해당"
 - Gender (성별):
   - MALE = "남성"
   - FEMALE = "여성"
-- AgeBand (연령대):
   - NOT_APPLICABLE = "미해당"
+- AgeBand (연령대):
   - A20 = "20"
   - A30 = "30"
   - A40 = "40"
@@ -39,6 +41,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - A60 = "60"
   - A70 = "70"
   - A80_PLUS = "80이상"
+  - NOT_APPLICABLE = "미해당"
 - CotStatus (CoT상태):
   - DRAFT = "작성중"
   - IN_REVIEW = "리뷰요청"
@@ -50,6 +53,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - STABLE = "안정형"
   - RISK_NEUTRAL = "위험중립형"
   - ACTIVE = "적극투자형"
+  - NOT_APPLICABLE = "미해당"
 - CrossSubscription (교차가입):
   - COVERAGE_ONLY = "보장only"
   - VARIABLE_ONLY = "변액only"
@@ -58,6 +62,28 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - COVERAGE_OTHER = "보장+기타"
   - VARIABLE_OTHER = "변액+기타"
   - COVERAGE_VARIABLE_OTHER = "보장+변액+기타"
+
+- RiskGrade (위험등급):
+  - GRADE_1 = "1등급"
+  - GRADE_2 = "2등급"
+  - GRADE_3 = "3등급"
+  - GRADE_4 = "4등급"
+  - GRADE_5 = "5등급"
+  - GRADE_6 = "6등급"
+
+- TaxBenefit (세제혜택):
+  - YES = "유"
+  - NO = "무"
+
+- PaymentType (납입형태):
+  - LUMP_SUM = "일시납"
+  - ADDITIONAL = "추가납입"
+  - MIXED = "혼합"
+
+- Liquidity (유동성):
+  - REDEEMABLE = "중도환매 가능"
+  - NON_REDEEMABLE = "중도환매 불가능"
+  - NOT_APPLICABLE = "미해당"
 
 ## Entities
 
