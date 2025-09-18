@@ -199,4 +199,4 @@ For each technology choice:
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v1.0.0 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.0 - See `/.specify/memory/constitution.md`*
