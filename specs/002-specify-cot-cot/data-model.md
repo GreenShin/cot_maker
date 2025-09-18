@@ -45,6 +45,22 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - APPROVED = "승인"
   - REJECTED = "반려"
 
+// 추가 Enums
+- CustomerRiskProfile (고객투자성향):
+  - AGGRESSIVE = "공격투자형"
+  - STABILITY_SEEKING = "안정추구형"
+  - STABLE = "안정형"
+  - RISK_NEUTRAL = "위험중립형"
+  - ACTIVE = "적극투자형"
+- CrossSubscription (교차가입):
+  - COVERAGE_ONLY = "보장only"
+  - VARIABLE_ONLY = "변액only"
+  - OTHER_ONLY = "기타only"
+  - COVERAGE_VARIABLE = "보장+변액"
+  - COVERAGE_OTHER = "보장+기타"
+  - VARIABLE_OTHER = "변액+기타"
+  - COVERAGE_VARIABLE_OTHER = "보장+변액+기타"
+
 ## Entities
 
 ### Questioner
