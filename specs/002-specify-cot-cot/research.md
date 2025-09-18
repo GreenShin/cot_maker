@@ -49,6 +49,14 @@
 
 ---
 
+## 10) 모호 사항 결정(Entities/Constraints)
+- Decision: Cot.product_category는 참조하는 모든 product_ids의 Product.product_category와 동일해야 한다. 서로 다를 경우 저장 불가(Validation Error).  
+  - Rationale: CoT 단위 일관된 분류 유지. 혼합 카테고리는 허용하지 않음.
+- Decision: Questioner.product_list는 Questioner가 보유한 Product.id 리스트이며, Cot.product_ids와 독립적으로 관리한다. CoT 저장 시 product_ids가 Questioner.product_list에 없어도 저장 가능하되, UI에서 경고 및 "질문자 보유상품에 추가" 선택을 제공한다(자동 동기화는 하지 않음).  
+  - Rationale: 데이터 무결성 강제 대신 사용 흐름 유연성 보장.
+- Decision: Product의 corpus 필드(만기/수익률/손실율/검색키워드/비고)는 자유 텍스트로 저장하며, 기술적 제한은 두지 않는다(권장 상한 8000자, UI에서 길이 가이드만 제공).  
+  - Rationale: 초기 범위에서 간결성/유연성을 우선.
+
 Checklist
 - [x] 필터/정렬/페이징 정책 정의
 - [x] 반응형 브레이크포인트/재배치 정의

@@ -153,6 +153,7 @@ Validation:
 - question_text required (≤ 4000)
 - cot_steps length 3..10, each ≤ 4000
 - answer_text ≤ 4000
+ - All Product.product_category for product_ids must equal Cot.product_category (no mixed categories)
 
 ## Relationships
 - Cot.product_ids[] → Product.id (many-to-many)
