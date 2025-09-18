@@ -3,10 +3,10 @@
 ## Enums
 Note: Stored values use Code (EN), UI displays Label (KO).
 
-- ProductCategory:
+- ProductCategory (상품분류):
   - SECURITIES = "증권"
   - INSURANCE = "보험"
-- ProductType:
+- ProductType (상품유형):
   - EQUITY = "주식형"
   - BOND = "채권형"
   - FUND_OF_FUNDS = "재간접"
@@ -20,17 +20,17 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - HEALTH = "건강"
   - CANCER = "암"
   - VARIABLE = "변액"
-- QuestionType:
+- QuestionType (질문유형):
   - EMPHASIZE_CUSTOMER_CHARACTERISTICS = "고객특성 강조형"
   - RISK_PROFILE_CONDITION_BASED = "투자성향 및 조건기반형"
   - PRODUCT_COMPARISON_RECOMMENDATION = "상품 비교 추천형"
   - AGE_LIFECYCLE_SAVINGS_RECOMMENDATION = "연령별 및 생애주기 저축성 상품 추천형"
   - INVESTMENT_PRODUCT_RECOMMENDATION = "투자성 상품 추천형"
   - HEALTH_DISEASE_COVERAGE = "건강 및 질병보장 대비형"
-- Gender:
+- Gender (성별):
   - MALE = "남성"
   - FEMALE = "여성"
-- AgeBand:
+- AgeBand (연령대):
   - A10 = "10"
   - A20 = "20"
   - A30 = "30"
@@ -39,7 +39,7 @@ Note: Stored values use Code (EN), UI displays Label (KO).
   - A60 = "60"
   - A70 = "70"
   - A80_PLUS = "80이상"
-- CotStatus:
+- CotStatus (CoT상태):
   - DRAFT = "작성중"
   - IN_REVIEW = "리뷰요청"
   - APPROVED = "승인"
