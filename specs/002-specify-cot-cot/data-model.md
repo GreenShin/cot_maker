@@ -1,12 +1,49 @@
 # Data Model: CoT/질문자/상품 (002-specify-cot-cot)
 
 ## Enums
-- ProductCategory: Securities | Insurance
-- QuestionType: Equity | Insurance | Fund | Other
-- ProductType: Equity | Insurance | Fund | Other
-- Gender: Male | Female
-- AgeBand: 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80plus
-- CotStatus: Draft | InReview | Approved | Rejected
+Note: Stored values use Code (EN), UI displays Label (KO).
+
+- ProductCategory:
+  - SECURITIES = "증권"
+  - INSURANCE = "보험"
+- ProductType:
+  - EQUITY = "주식형"
+  - BOND = "채권형"
+  - FUND_OF_FUNDS = "재간접"
+  - MONEY_MARKET = "단기금융"
+  - DERIVATIVE = "파생형"
+  - TRUST_RETIREMENT = "신탁/퇴직연금"
+  - PENSION = "연금"
+  - WHOLE_LIFE = "종신"
+  - TERM = "정기"
+  - DISEASE = "질병"
+  - HEALTH = "건강"
+  - CANCER = "암"
+  - VARIABLE = "변액"
+- QuestionType:
+  - EMPHASIZE_CUSTOMER_CHARACTERISTICS = "고객특성 강조형"
+  - RISK_PROFILE_CONDITION_BASED = "투자성향 및 조건기반형"
+  - PRODUCT_COMPARISON_RECOMMENDATION = "상품 비교 추천형"
+  - AGE_LIFECYCLE_SAVINGS_RECOMMENDATION = "연령별 및 생애주기 저축성 상품 추천형"
+  - INVESTMENT_PRODUCT_RECOMMENDATION = "투자성 상품 추천형"
+  - HEALTH_DISEASE_COVERAGE = "건강 및 질병보장 대비형"
+- Gender:
+  - MALE = "남성"
+  - FEMALE = "여성"
+- AgeBand:
+  - A10 = "10"
+  - A20 = "20"
+  - A30 = "30"
+  - A40 = "40"
+  - A50 = "50"
+  - A60 = "60"
+  - A70 = "70"
+  - A80_PLUS = "80이상"
+- CotStatus:
+  - DRAFT = "작성중"
+  - IN_REVIEW = "리뷰요청"
+  - APPROVED = "승인"
+  - REJECTED = "반려"
 
 ## Entities
 
